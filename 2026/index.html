@@ -178,8 +178,7 @@
     }
 
     .card {
-      color: inherit;
-      text-decoration: none;
+      position: relative;
       background: var(--surface);
       border-radius: var(--radius);
       padding: 0.9rem 0.9rem 1.1rem;
@@ -259,6 +258,39 @@
       margin-bottom: 0.2rem;
     }
 
+    .card-main { color: inherit; text-decoration: none; }
+
+    .card-main::after {            /* makes the whole card clickable */
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      border-radius: var(--radius);
+    }
+
+    .card-links {                  /* small extra links, sit above the card-wide link */
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      gap: 0.4rem;
+      margin-top: 0.55rem;
+    }
+
+    .card-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--ink-2);
+      text-decoration: none;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid #dbe2ee;
+      background: #f5f7fb;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+
+    .card-links a:hover { color: #fff; background: var(--navy); border-color: var(--navy); }
+
     .card-open {                    /* little arrow that appears on hover */
       position: absolute;
       top: 10px; right: 10px;
@@ -280,7 +312,7 @@
     .card:hover .card-title { color: var(--blue); }
     .card-title { transition: color 0.2s; }
 
-    .card.is-pending { cursor: default; }
+    .card.is-pending .card-main { cursor: default; }
     .card.is-pending:hover { transform: none; }
     .card.is-pending .card-open { display: none; }
     .card.is-pending:hover .card-title { color: inherit; }
@@ -352,48 +384,53 @@
     <div class="project-grid">
 
       <!-- ================= PROJECT 1 ================= -->
-      <!-- LINK: the student's website. Leave href="" if it isn't ready yet -->
-      <a class="card" href="https://gomoku.ruiqiluo.com" target="_blank" rel="noopener">
+      <div class="card">
         <div class="card-preview">
           <!-- THUMBNAIL: image path in src -->
           <img src="gomoku.png" alt="Gomoku preview" />
           <span class="card-open" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
         </div>
         <div class="card-body">
-          <h3 class="card-title">Gomoku</h3>   <!-- GAME TITLE -->
+          <!-- MAIN LINK: the live game. Clicking anywhere on the card opens it. Leave href="" if it isn't ready yet --> 
+          <h3 class="card-title"><a class="card-main" href="https://gomoku.ruiqiluo.com" target="_blank" rel="noopener">Gomoku</a></h3>
           <div class="card-author">Ruiqi (Ricky) Luo</div>   <!-- STUDENT NAME -->
         </div>
-      </a>
+      </div>
 
       <!-- ================= PROJECT 2 ================= -->
-      <!-- LINK -->
-      <a class="card" href="" target="_blank" rel="noopener">
+      <div class="card">
         <div class="card-preview">
           <!-- THUMBNAIL -->
-          <img src="thumbnails/chess.png" alt="Chess AI preview" />
+          <img src="bughouse-ai-logo.png" alt="Bughouse preview" />
           <span class="card-open" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
         </div>
         <div class="card-body">
-          <h3 class="card-title">Project 2</h3>   <!-- GAME TITLE -->
-          <div class="card-author">Student Name</div>   <!-- STUDENT NAME -->
+          <!-- MAIN LINK -->
+          <h3 class="card-title"><a class="card-main" href="https://bughouse.sumitk.me" target="_blank" rel="noopener">Bughouse</a></h3>
+          <div class="card-author">Sumit Kumar</div>   <!-- STUDENT NAME -->
+          <!-- EXTRA LINKS (optional): delete this whole <div> if there are none -->
+          <div class="card-links">
+            <a href="https://github.com/sumitkumar91/bughouse-ai" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://sumitk.me" target="_blank" rel="noopener">Website</a>
+          </div>
         </div>
-      </a>
+      </div>
 
       <!-- ================= PROJECT 3 ================= -->
-      <!-- LINK -->
-      <a class="card" href="" target="_blank" rel="noopener">
+      <div class="card">
         <div class="card-preview">
           <!-- THUMBNAIL -->
-          <img src="thumbnails/pacman.png" alt="Pac-Man AI preview" />
+          <img src="thumbnails/pacman.png" alt="Project 3 preview" />
           <span class="card-open" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
         </div>
         <div class="card-body">
-          <h3 class="card-title">Project 3</h3>   <!-- GAME TITLE -->
+          <!-- MAIN LINK -->
+          <h3 class="card-title"><a class="card-main" href="" target="_blank" rel="noopener">Project 3</a></h3>
           <div class="card-author">Student Name</div>   <!-- STUDENT NAME -->
         </div>
-      </a>
+      </div>
 
-      <!-- To add a project: copy one <a class="card"> ... </a> block and paste it here. -->
+      <!-- To add a project: copy one <div class="card"> ... </div> block and paste it here. -->
 
     </div>
   </main>
@@ -404,9 +441,10 @@
 
   <script>
     document.querySelectorAll(".card").forEach((card) => {
-      // No website yet: make the card non-clickable
-      if (!card.getAttribute("href")) {
-        card.removeAttribute("href");
+      // No live game yet: make the card non-clickable
+      const main = card.querySelector(".card-main");
+      if (main && !main.getAttribute("href")) {
+        main.removeAttribute("href");
         card.classList.add("is-pending");
       }
       // Thumbnail file missing: hide the broken image and show the empty frame
