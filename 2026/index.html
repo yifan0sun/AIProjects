@@ -44,7 +44,7 @@
         radial-gradient(900px 420px at 85% 10%, rgba(61, 123, 255, 0.35), transparent 60%),
         radial-gradient(700px 380px at 5% 100%, rgba(63, 210, 255, 0.18), transparent 60%),
         linear-gradient(160deg, #071022 0%, #0c1d3d 55%, #0a1730 100%);
-      padding-bottom: 7rem;
+      padding-bottom: 6rem;
     }
 
     header::after {               /* gold rule along the bottom of the hero */
@@ -167,21 +167,24 @@
       position: relative;
       z-index: 3;
       max-width: 1160px;
-      margin: -4.5rem auto 0;
+      margin: -3rem auto 0;
       padding: 0 1.5rem 5rem;
     }
 
     .project-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.75rem;
+      grid-template-columns: repeat(auto-fit, 260px);   /* fixed-width columns, wraps on small screens */
+      justify-content: center;
+      gap: 1.5rem;
     }
 
     .card {
       position: relative;
+      width: 260px;
+      height: 368px;                 /* fixed card size */
       background: var(--surface);
       border-radius: var(--radius);
-      padding: 0.9rem 0.9rem 1.1rem;
+      padding: 14px;
       display: flex;
       flex-direction: column;
       text-align: center;
@@ -201,26 +204,16 @@
         0 36px 64px -16px rgba(10, 23, 48, 0.3);
     }
 
-    .card-preview {
+    .card-preview {                  /* fixed square image area */
       position: relative;
-      aspect-ratio: 4 / 3;
-      border-radius: 12px;
+      width: 232px;
+      height: 232px;
+      flex: none;
+      margin-bottom: 14px;
+      border-radius: 10px;
       overflow: hidden;
-      margin-bottom: 1.15rem;
-      background: linear-gradient(145deg, #1a2d52 0%, #0d1a33 100%);
-      box-shadow:
-        0 10px 24px -6px rgba(10, 23, 48, 0.45),
-        0 4px 8px rgba(10, 23, 48, 0.15);
-    }
-
-    .card-preview::after {         /* inner ring + top sheen */
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), transparent 35%);
-      pointer-events: none;
+      background: #e9edf4;           /* shows if the image is missing */
+      box-shadow: 0 4px 12px rgba(10, 23, 48, 0.15);
     }
 
     .card-preview > img {
@@ -231,31 +224,29 @@
       transition: transform 0.5s cubic-bezier(.2,.8,.2,1);
     }
 
-    .card:hover .card-preview > img {
-      transform: scale(1.045);
-    }
+    .card:hover .card-preview > img { transform: scale(1.04); }
 
     .card-body {
       display: flex;
       flex-direction: column;
       align-items: center;
       flex-grow: 1;
-      padding: 0 0.6rem;
     }
 
     .card-title {
       font-family: var(--display);
-      font-size: 1.4rem;
+      font-size: 1.15rem;
       font-weight: 700;
+      line-height: 1.3;
       letter-spacing: -0.02em;
-      margin-bottom: 0.15rem;
+      margin-bottom: 0.1rem;
+      transition: color 0.2s;
     }
 
     .card-author {
-      font-size: 0.86rem;
+      font-size: 0.82rem;
       font-weight: 500;
       color: var(--blue);
-      margin-bottom: 0.2rem;
     }
 
     .card-main { color: inherit; text-decoration: none; }
@@ -274,15 +265,15 @@
       display: flex;
       justify-content: center;
       gap: 0.4rem;
-      margin-top: 0.55rem;
+      margin-top: 0.4rem;
     }
 
     .card-links a {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 500;
       color: var(--ink-2);
       text-decoration: none;
-      padding: 0.2rem 0.7rem;
+      padding: 0.2rem 0.65rem;
       border-radius: 999px;
       border: 1px solid #dbe2ee;
       background: #f5f7fb;
@@ -293,9 +284,9 @@
 
     .card-open {                    /* little arrow that appears on hover */
       position: absolute;
-      top: 10px; right: 10px;
+      top: 8px; right: 8px;
       z-index: 2;
-      width: 32px; height: 32px;
+      width: 30px; height: 30px;
       display: grid;
       place-items: center;
       border-radius: 50%;
@@ -308,9 +299,7 @@
     }
 
     .card:hover .card-open { opacity: 1; transform: none; }
-
     .card:hover .card-title { color: var(--blue); }
-    .card-title { transition: color 0.2s; }
 
     .card.is-pending .card-main { cursor: default; }
     .card.is-pending:hover { transform: none; }
@@ -323,10 +312,6 @@
       text-align: center;
       font-size: 0.85rem;
       color: var(--muted);
-    }
-
-    @media (max-width: 760px) {
-      .project-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
     }
 
     @media (max-width: 640px) {
@@ -420,13 +405,13 @@
       <div class="card">
         <div class="card-preview">
           <!-- THUMBNAIL -->
-          <img src="thumbnails/pacman.png" alt="Project 3 preview" />
+          <img src="2048.png" alt="2048" />
           <span class="card-open" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
         </div>
         <div class="card-body">
           <!-- MAIN LINK -->
-          <h3 class="card-title"><a class="card-main" href="" target="_blank" rel="noopener">Project 3</a></h3>
-          <div class="card-author">Student Name</div>   <!-- STUDENT NAME -->
+          <h3 class="card-title"><a class="card-main" href="" target="_blank" rel="noopener">2048</a></h3>
+          <div class="card-author">Mingu Hwang</div>   <!-- STUDENT NAME -->
         </div>
       </div>
 
@@ -440,6 +425,17 @@
   </footer>
 
   <script>
+    // Shuffle the project order on every visit (delete this block to keep the order as written)
+    (function shuffleProjects() {
+      const grid = document.querySelector(".project-grid");
+      const cards = [...grid.querySelectorAll(":scope > .card")];
+      for (let i = cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cards[i], cards[j]] = [cards[j], cards[i]];
+      }
+      cards.forEach((card) => grid.appendChild(card));
+    })();
+
     document.querySelectorAll(".card").forEach((card) => {
       // No live game yet: make the card non-clickable
       const main = card.querySelector(".card-main");
