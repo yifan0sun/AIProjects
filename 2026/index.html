@@ -44,7 +44,7 @@
         radial-gradient(900px 420px at 85% 10%, rgba(61, 123, 255, 0.35), transparent 60%),
         radial-gradient(700px 380px at 5% 100%, rgba(63, 210, 255, 0.18), transparent 60%),
         linear-gradient(160deg, #071022 0%, #0c1d3d 55%, #0a1730 100%);
-      padding-bottom: 6rem;
+      padding-bottom: 4rem;
     }
 
     header::after {               /* gold rule along the bottom of the hero */
@@ -84,7 +84,7 @@
       transform: translateY(-38%);
       font-family: var(--display);
       font-weight: 800;
-      font-size: clamp(9rem, 20vw, 17rem);
+      font-size: clamp(6rem, 13vw, 11rem);
       line-height: 1;
       letter-spacing: -0.04em;
       color: transparent;
@@ -98,7 +98,7 @@
       z-index: 2;
       max-width: 1160px;
       margin: 0 auto;
-      padding: 1.1rem 1.5rem;
+      padding: 0.8rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -121,7 +121,7 @@
       z-index: 2;
       max-width: 1100px;
       margin: 0 auto;
-      padding: 3.5rem 1.5rem 1rem;
+      padding: 1.25rem 1.5rem 0.5rem;
       text-align: center;
     }
 
@@ -154,7 +154,7 @@
     .hero-dept {
       font-size: 0.98rem;
       color: #93a3bf;
-      margin-bottom: 1.6rem;
+      margin-bottom: 0.9rem;
     }
 
     .hero-desc {
@@ -173,15 +173,15 @@
 
     .project-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, 260px);   /* fixed-width columns, wraps on small screens */
+      grid-template-columns: repeat(auto-fit, 340px);   /* fixed-width columns, wraps on small screens */
       justify-content: center;
       gap: 1.5rem;
     }
 
     .card {
       position: relative;
-      width: 260px;
-      height: 368px;                 /* fixed card size */
+      width: 340px;
+      height: 340px;                 /* fixed card size */
       background: var(--surface);
       border-radius: var(--radius);
       padding: 14px;
@@ -206,8 +206,8 @@
 
     .card-preview {                  /* fixed square image area */
       position: relative;
-      width: 232px;
-      height: 232px;
+      width: 312px;
+      height: 204px;
       flex: none;
       margin-bottom: 14px;
       border-radius: 10px;
@@ -379,6 +379,9 @@
           <!-- MAIN LINK: the live game. Clicking anywhere on the card opens it. Leave href="" if it isn't ready yet --> 
           <h3 class="card-title"><a class="card-main" href="https://gomoku.ruiqiluo.com" target="_blank" rel="noopener">Gomoku</a></h3>
           <div class="card-author">Ruiqi (Ricky) Luo</div>   <!-- STUDENT NAME -->
+          <div class="card-links">
+            <a href="https://ruiqiluo.com/" target="_blank" rel="noopener">Website</a>
+          </div>
         </div>
       </div>
 
